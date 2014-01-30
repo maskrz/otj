@@ -1,89 +1,100 @@
 <%= render "partials/header" %>
 
 <div class = "wrapper content-training">
-<div class = "main-content">
-	<div class = "row">
-		<div class = "col-xs-offset-1 col-xs-11">
-			Dane o treningu:
-		</div>
-	</div>
-	<div class = "row">
-		<div class = "col-xs-offset-1 col-xs-2">
-			Data:
-		</div>
-		<div class = "col-xs-9">
-			<%= @training.date %>
-		</div>
-	</div>
-	<div class = "row">
-		<div class = "col-xs-offset-1 col-xs-2">
-			Komentarz:
-		</div>
-		<div class = "col-xs-9">
-			<%= simple_format @training.comment %>
-		</div>
-	</div>
-	<hr>
-	<div class = "row">
-		<div class = "col-xs-offset-1 col-xs-11" style = "margin-bottom: 20px">
-			Zawodnicy, ktorzy wykonali trening:
-		</div>
-	</div>
-	<% if @athletes.size == 0 %>
-			<div class = "row" >
-				<div class = "col-xs-offset-1 col-xs-11">
-					Nikt nie wykonał jeszcze tego treningu...
-				</div>
-				
+	<div class = "main-content">
+		<div class = "row">
+			<div class = "col-xs-offset-1 col-xs-11">
+				Dane o treningu:
 			</div>
-			<hr>
+		</div>
+		<div class = "row">
+			<div class = "col-xs-offset-1 col-xs-2">
+				Data:
+			</div>
+			<div class = "col-xs-9">
+				<%= @training.date %>
+			</div>
+		</div>
+		<div class = "row">
+			<div class = "col-xs-offset-1 col-xs-2">
+				Komentarz:
+			</div>
+			<div class = "col-xs-9">
+				<%= simple_format @training.comment %>
+			</div>
+		</div>
+		<hr>
+		<div class = "row">
+			<div class = "col-xs-offset-1 col-xs-11" style = "margin-bottom: 20px">
+				Zawodnicy, ktorzy wykonali trening:
+			</div>
+		</div>
+		<% if @athletes.size == 0 %>
+		<div class = "row" >
+			<div class = "col-xs-offset-1 col-xs-11">
+				Nikt nie wykonał jeszcze tego treningu...
+			</div>
+
+		</div>
+		<hr>
 		<% else %>
-		
-			<% @athletes.each do |a| %>
-				<div class="row">
-					<div class = "col-xs-offset-1 col-xs-3 athlete-name">
-						<%= a.full_name %>
-					</div>
-					<div class = "col-xs-offset-5">
-						<%= link_to "Usun z treningu", {:controller => "trainings", :action => "remove_athlete", :a_id => a.id, :t_id => @training.id}, :class => "btn btn-danger" %></br>
-				
-					</div>
+
+		<% @athletes.each do |a| %>
+		<div class="row">
+			<div class = "col-xs-offset-1 col-xs-3 athlete-name">
+				<%= a.full_name %>
+			</div>
+			<div class = "col-xs-offset-5">
+				<%= link_to "Usun z treningu", {:controller => "trainings", :action => "remove_athlete", :a_id => a.id, :t_id => @training.id}, :class => "btn btn-danger" %></br>
+
+			</div>
+		</div>
+		<div style = "font-weight: bold", class = "row sections-font cent medium-margin-top">
+			<div class = "col-xs-offset-2 col-xs-2">
+				Odcinek:
+			</div>
+			<div class = "col-xs-2">
+				Czas:
+			</div>
+			<div class = "col-xs-2">
+				Przerwa:
+			</div>
+		</div>
+		<% @sections = a.sections_list(a.get_at(@training.id, a.id)) %>
+		<% if @sections.size != 0 %>
+		<% $i = 1 %>
+		<% @sections.each do |s| %>
+
+		<div class = "row sections-font cent ">
+			<div class = "col-xs-offset-1 col-xs-1 ">
+				<%= $i %>.
+			</div>
+			<div class = "col-xs-2 ">
+				<%= s.length.to_s %>
+			</div>
+			<div class = "col-xs-2">
+				<%= s.time %>
+			</div>
+			<div class = "col-xs-2">
+				<%= s.break %>
+			</div>
+
+			<div style="float: left" class = "col-xs-2 form-inline dinline">
+				<div style="float: left">
+				<%= button_to "", {:controller => 'sections', :action => 'remove_section', :id => s.id}, class: "btn small-rect remove-button" %>
 				</div>
-				<div style = "font-weight: bold", class = "row sections-font cent medium-margin-top">
-					<div class = "col-xs-offset-2 col-xs-2">
-						Odcinek:
-					</div>
-					<div class = "col-xs-2">
-						Czas:
-					</div>
-					<div class = "col-xs-2">
-						Przerwa:
-					</div>
+				<% if $i > 1%>
+				<div style="float: left">
+				<%= button_to "", {:controller => 'sections', :action => 'move_up', :id => s.id}, class: "btn small-rect move-up-button" %>
 				</div>
-				<% @sections = a.sections_list(a.get_at(@training.id, a.id)) %>
-				<% if @sections.size != 0 %> 
-				<% $i = 1 %>
-					<% @sections.each do |s| %>
-					
-						<div class = "row sections-font cent ">
-							<div class = "col-xs-offset-1 col-xs-1 ">
-								<%= $i %>.
-							</div>
-							<div class = "col-xs-2 ">
-								<%= s.length.to_s %>
-							</div>
-							<div class = "col-xs-2">
-								<%= s.time %>
-							</div>
-							<div class = "col-xs-2">
-								<%= s.break %>
-							</div>
-						</div>
-						<% $i+=1 %>
 				<% end %>
-			<% end %>
-	
-	
+			</div>
+
+		</div>
+		<% $i+=1 %>
+		<% end %>
+		<% end %>
+
 		<div class = "row cent">
 			<%= form_for :section, :url => url_for(:controller => 'sections', :action => 'add'), method: :post do |s| %>
 			<div style = "padding-top: 3px" class="col-xs-offset-2 col-xs-2">
@@ -96,33 +107,33 @@
 				<%= s.text_field :break, :size => 15 %>
 			</div>
 			<div class="actions col-xs-2">
-				
+
 				<%= s.hidden_field :sequence, :value => a.last_section_sequence(a.get_at(@training.id, a.id)) %>
 				<%= s.hidden_field :atraining_id, :value => a.get_at(@training.id, a.id).id %>
 				<%= s.hidden_field :training_id, :value => @training.id %>
-				
+
 				<%= s.submit "Dodaj odcinek", class: "btn btn-success" %>
 			</div>
 			<% end %>
 		</div>
 		<hr>
-		
-		<% end %>
-	<% end %>
-	
-	<div>
-	<div class = "row">
-		<div class = "col-xs-offset-1 col-xs-11 small-margin-bottom">
-			Dodaj zawodników:
-		</div>
-	<div class = "athletes-container">
-	<% @all_athletes.each do |a| %>
-		<div style="float: left" class="col-xs-3">
-			<%= button_to a.full_name, {:controller => "trainings", :action => "add_athlete", :a_id => a.id, :id => @training.id}, :class => "btn btn-info btn-block" %></br>
-		</div>  
-	<% end %>
-	</div>
-	</div>
-	<%= link_to 'Wyloguj', auth_sign_out_path %>
 
-<%= render "partials/footer" %>
+		<% end %>
+		<% end %>
+
+		<div>
+			<div class = "row">
+				<div class = "col-xs-offset-1 col-xs-11 small-margin-bottom">
+					Dodaj zawodników:
+				</div>
+				<div class = "athletes-container">
+					<% @all_athletes.each do |a| %>
+					<div style="float: left" class="col-xs-3">
+						<%= button_to a.full_name, {:controller => "trainings", :action => "add_athlete", :a_id => a.id, :id => @training.id}, :class => "btn btn-info btn-block" %></br>
+					</div>
+					<% end %>
+				</div>
+			</div>
+			<%= link_to 'Wyloguj', auth_sign_out_path %>
+
+			<%= render "partials/footer" %>

@@ -30,6 +30,8 @@ OTD::Application.routes.draw do
   
   scope :sections, :controller => :sections, :as => :sections do
     match 'add', action: :add, via: [:get, :post]
+    match 'remove_section', action: 'remove_section', via: [:get, :post]
+    match 'move_up', action: 'move_up', via: [:get, :post]
   end
   
   scope :groups, :controller => :groups, :as => :groups do
