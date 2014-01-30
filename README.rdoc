@@ -23,6 +23,7 @@ Things you may want to cover:
 
 * ...
 
+![Codeship Status](https://www.codeship.io/projects/4b2bb540-6c23-0131-bfbd-16b279d2e4fc/status)
 
 Please feel free to use a different markup language if you do not plan to run
 <tt>rake doc:app</tt>.
