@@ -4,7 +4,7 @@ source 'https://rails-assets.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0'
 
-gem 'ruby', '1.9.3-p392'
+gem 'ruby', '1.9.3'
 
 gem 'pg'
 
