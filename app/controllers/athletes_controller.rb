@@ -1,17 +1,20 @@
 class AthletesController < ApplicationController
+  require 'digest/md5'
+  
   
   def new_athlete
     @athlete = Athlete.new(athlete_params)
     #render json: athlete_params
     @athlete.privacy = 4
-    @athlete.password = "pass"
+    pass = params[:athlete][:name][0, 2].downcase + params[:athlete][:surname][0, 3].downcase
+    @athlete.password = Digest::MD5.hexdigest(pass)
     @athlete.state = 1
     @athlete.save
     redirect_to root_path, notice: "Dodano nowego zawodnika"
   end
 
   def add_athlete
-    @athletes = Athlete.all - current_user.athletes
+    @athletes = Athlete.where("trainer_id is null")
   end
   
   def assign_athlete

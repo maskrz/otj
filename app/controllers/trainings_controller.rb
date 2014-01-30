@@ -44,7 +44,7 @@ class TrainingsController < ApplicationController
   def trainings_history
     #render json: params[:id]
     @athlete = Athlete.find(params[:id])
-    @trainings = @athlete.trainings
+    @trainings = @athlete.trainings.order("date desc")
     @sec = @athlete.sections.order("length desc").map{|x| x.length}.uniq
     
   end

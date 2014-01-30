@@ -1,5 +1,6 @@
 <div class = "wrapper content-training">
 	<div class = "main-content">
+		<% if @athletes.size > 0 %>
 		<div class = "cent">
 			Wybierz zawodnika z już zarejestrowanych:
 			<%= form_for :athlete, :url => url_for(:controller => :athletes, :action => 'assign_athlete'), method: :post do |f| %>
@@ -14,6 +15,7 @@
 				<%= f.submit "Dodaj zawodnika", class: "btn btn-primary" %>
 				<% end %>
 			</div>
+			<% end %>
 		</div>
 		<% end %>
 		<div id = "new-athlete-box">
@@ -52,7 +54,7 @@
 		<p class="slide">
 			</br>
 			<div class="pull-me btn-info">
-				Lub kliknij, by dodać nowego!
+				Kliknij, by dodać nowego!
 			</div>
 		</p>
 	</div>
