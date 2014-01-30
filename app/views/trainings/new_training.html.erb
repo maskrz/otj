@@ -19,7 +19,7 @@
 		<div class="form-group row">
 			<%= f.label 'Trener', class: "col-xs-4 control-label right" %>
 			<div class="col-xs-8">
-				<%= f.collection_select(:trainer_id, @trainers, "id", "surname", {:selected => current_user.id}) %>
+				<%= f.collection_select(:trainer_id, @trainers, "id", "display_name", {:selected => current_user.id}) %>
 			</div>
 		</div>
 
@@ -31,5 +31,3 @@
 		</br>
 	</div>
 </div>
-
-<%= link_to 'Wyloguj', auth_sign_out_path %>

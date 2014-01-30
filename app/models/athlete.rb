@@ -1,4 +1,6 @@
 class Athlete < ActiveRecord::Base
+  require 'digest/md5'
+  
   belongs_to :trainer
   has_many :trainings, :through => :atrainings
   has_many :atrainings
@@ -24,6 +26,10 @@ class Athlete < ActiveRecord::Base
   
   def get_trainings ()
     @trainings = trainings.order("date asc")
+  end
+  
+  def authenticate (pass)
+    self.password == Digest::MD5.hexdigest(pass)
   end
   
 end

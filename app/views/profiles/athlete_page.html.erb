@@ -18,7 +18,7 @@
 			<%= t.date %> <%= link_to "Dołącz", :controller => "trainings", :action => "add_athlete", :id => t.id, :a_id => @a.id %></br>
 			<% end %>
 			</br>
-			<%= link_to "Wszystkie", :controller => :trainings, :action => "trainer_trainings", :id => @a.trainer %>
+			<%= link_to "Wszystkie", :controller => :trainings, :action => "trainer_trainings", :id => @a.trainer %> </br></br>
 			<%= link_to 'Historia treningow', :controller => "trainings", :action => "trainings_history", :id => @a.id %>
 		</div>
 	</div>

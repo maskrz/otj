@@ -1,5 +1,6 @@
 class ProfilesController < ApplicationController
   require 'enumerator'
+  require 'digest/md5'
   
   def athlete_page
     @athlete = current_user
@@ -17,9 +18,7 @@ class ProfilesController < ApplicationController
   def trainer_page
     @trainer = current_user
     @athletes = Athlete.where(trainer_id: current_user.id)
-    @trainings = Training.where(trainer_id: current_user.id).order('date DESC').first(5)
-    
-    
+    @trainings = Training.where(trainer_id: current_user.id).order('date DESC').first(5)    
   end
   
   def update_trainer
@@ -32,7 +31,7 @@ class ProfilesController < ApplicationController
     @trainer.birth = params[:trainer]["birth(1i)"] + "-"+params[:trainer]["birth(2i)"]+"-"+params[:trainer]["birth(3i)"]
     
     if(params[:trainer][:password] == params[:trainer][:password_confirmation] && !params[:trainer][:password].blank?)
-      @trainer.password = params[:trainer][:password]
+      @trainer.password = Digest::MD5.hexdigest(params[:trainer][:password])
       pass_changed = true
     end    
     
@@ -67,7 +66,7 @@ class ProfilesController < ApplicationController
     @athlete.birth = params[:athlete]["birth(1i)"] + "-"+params[:athlete]["birth(2i)"]+"-"+params[:athlete]["birth(3i)"]
     
     if(params[:athlete][:password] == params[:athlete][:password_confirmation] && !params[:athlete][:password].blank?)
-      @athlete.password = params[:athlete][:password]
+      @athlete.password = Digest::MD5.hexdigest(params[:athlete][:password])
       pass_changed = true
     end    
     

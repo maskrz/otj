@@ -5,6 +5,9 @@ class Ability
     
     if current_user.kind_of? Trainer
       can :manage, :all
+      can :manage_training, Training do |training|
+        training.trainer == current_user
+      end
     elsif current_user.kind_of? Athlete
       can :read, Athlete do |athlete|
         athlete.privacy <= 2 || (athlete.privacy == 3 && athlete.trainer == current_user.trainer) || athlete == current_user

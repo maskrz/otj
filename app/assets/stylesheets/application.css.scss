@@ -21,6 +21,12 @@
     width: 1000px;
     margin: 0 auto;
   }
+  
+  a {
+    color: #DDDDDD!important;
+    font-size: 1.1em;
+    text-decoration: none;
+  }
 
   .header {
     
@@ -244,12 +250,7 @@
   }
   
   #new-athlete-box {
-    border-style: solid;
-    border-width: 3px;
-    border-color: #000099;
-    border-radius: 10px;
-    background-color: #BDECC5;
-    min-height: 200px;
+    
     margin: 0px, auto;
     padding-top: 25px;
     
