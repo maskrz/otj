@@ -11,6 +11,15 @@ development:
   password: root
   host: 127.0.0.1
   port: 5432
+  
+test:
+  adapter: postgresql
+  encoding: utf8
+  database: otd
+  username: postgres
+  password: root
+  host: 127.0.0.1
+  port: 5432
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
