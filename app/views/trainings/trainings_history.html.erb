@@ -1,5 +1,3 @@
-<%= render "partials/header" %>
-
 <div class = "wrapper content-training">
 	<div class = "main-content">
 
@@ -23,16 +21,16 @@
 				<%= f.collection_select("t1", @trainings, :id, :date, include_blank: true, :selected => params["training"]["t1"]) %>
 
 				<% @t1 = Training.find(params["training"]["t1"]) %>
-				<% @sections = @t1.athlete_training_sections(params["a_id"]) %>
+				<% @sections = @t1.athlete_training_sections(params[:id]) %>
 				</br>
 
-				<table class = "table table-striped table-bordered table-hover cent blue-back">
+				<table class = "table table-striped table-bordered table-hover cent blue-back shadow">
 					<% if @sections.size > 0 %>
 					<tr class = "danger">
-						<td># </td>
-						<td>Odcinek </td>
-						<td>Czas: </td>
-						<td>Przerwa: </td>
+						<td class = "grey-back"># </td>
+						<td class = "grey-back">Odcinek </td>
+						<td class = "grey-back">Czas: </td>
+						<td class = "grey-back">Przerwa: </td>
 					</tr>
 					<% end %>
 					<% $i = 1 %>
@@ -57,15 +55,15 @@
 				<%= f.collection_select("t2", @trainings, :id, :date, include_blank: true, :selected => params["training"]["t2"]) %>
 
 				<% @t2 = Training.find(params["training"]["t2"]) %>
-				<% @sections = @t2.athlete_training_sections(params["a_id"]) %>
+				<% @sections = @t2.athlete_training_sections(params[:id]) %>
 				</br>
-				<table class = "table table-striped table-bordered table-hover cent blue-back">
+				<table class = "table table-striped table-bordered table-hover cent blue-back shadow">
 					<% if @sections.size > 0 %>
-					<tr class = "danger">
-						<td># </td>
-						<td>Odcinek </td>
-						<td>Czas: </td>
-						<td>Przerwa: </td>
+					<tr>
+						<td class = "grey-back"># </td>
+						<td class = "grey-back">Odcinek </td>
+						<td class = "grey-back">Czas: </td>
+						<td class = "grey-back">Przerwa: </td>
 					</tr>
 					<% end %>
 					<% $i = 1 %>
@@ -128,17 +126,17 @@
 		<% @tr = @athlete.get_trainings %>
 		<% @s_val.each do |s| %>
 
-		<table class = "table table-striped table-bordered table-hover cent blue-back margin-right-left table-history">
-			<tr class = "sections-font table-history danger">
-				<td><%= s %></td>
+		<table class = "table table-striped table-bordered table-hover cent blue-back margin-right-left table-history shadow">
+			<tr class = "sections-font danger">
+				<td class = "grey-back right-border"><h2><%= s %></h2></td>
 			</tr>
 			<% @tr.each do |tr| %>
 			<% @sec_val = tr.athlete_training_sections_values(@athlete, s) %>
 			<% if @sec_val.size > 0 %>
-			<tr>
-				<td><%= tr.date %> </td>
+			<tr class = "none-border">
+				<td class = "right-border"><%= tr.date %> </td>
 				<% @sec_val.each do |sec| %>
-				<td><%= sec.time %> </td>
+				<td class = "none-border"><%= sec.time %> </td>
 				<% end %>
 			</tr>
 			<% end %>
@@ -153,4 +151,3 @@
 </div>
 <%= link_to 'Wyloguj', auth_sign_out_path %>
 
-<%= render "partials/footer" %>

@@ -14,6 +14,9 @@
  *= require home
  */
 
+  body {
+    background-image: url(back1.jpg)!important;
+  }
   .wrapper {
     width: 1000px;
     margin: 0 auto;
@@ -39,35 +42,38 @@
   .main-content {
     border-style: solid;
     border-width: 3px;
-    border-color: #000099;
+    border-color: black;
     border-radius: 10px;
-    background-color: #BDECC5;
+    background:rgba(70,70,120,0.95);
     min-height: 200px;
     margin: 0px, auto;
     padding-top: 25px;
+    color: black;
   }
   
   .trainer-page-content {
     border-style: solid;
     border-width: 3px;
-    border-color: #000099;
+    border-color: black;
     border-top-left-radius: 25px;
     border-top-right-radius: 25px;
-    background-color: #BDECC5;
+    background:rgba(70,70,120,0.95);
     min-height: 200px;
     padding-top: 25px;
+    color: black;
   }
   
   .trainer-page-datas {
     border-style: solid;
     border-width: 3px;
-    border-color: #000099;
+    border-color: black;
     border-top: none;
     border-bottom-left-radius: 25px;
     border-bottom-right-radius: 25px;
-    background-color: #BDECC5;
+    background:rgba(70,70,120,0.95);
     min-height: 200px;
     padding-top: 25px;
+    color: black;
   }
   
   .left-border {
@@ -99,7 +105,11 @@
   }
   
   .blue-back {
-    background-color: #57AAE8;
+    background:rgba(120,120,210,1);
+  }
+  
+  .grey-back {
+    background:rgba(120,120,120,1)!important;
   }
   
   .margin-right-left {
@@ -143,20 +153,47 @@
   }
   .content-start {
     min-height: 270px;
-    background-color: #9FCFFF;
+    
     border-radius: 0px 0px 100px 100px;
     padding: 20px 200px 20px 200px;
+    background:rgba(50,50,50,0.6);
   }
   
   .content-training {
     min-height: 270px;
-    background-color: #9FCFFF;
+    background:rgba(50,50,50,0.6);
     border-radius: 0px 0px 20px 20px;
     padding: 20px 20px 20px 20px;
   }
   
   .table-history {
     border-top-right-radius: 30px;
+    border-color: black!important;
+    border-bottom: 4px solid black!important;
+    border-left: 4px solid black!important;
+    border-right: none!important;
+    border-top: none!important;
+    margin-bottom: 40px!important;
+    
+  }
+  
+  .shadow {
+    box-shadow: -5px 5px 10px black;
+  }
+  
+  .blak-border {
+    border-color: black;
+  }
+  
+  .none-border {
+    border: none!important;
+  }
+  
+  .right-border {
+    border-right: 2px solid black!important;
+    border-top: none!important;
+    border-left: none!important;
+    border-bottom: none!important;
   }
   
   .athlete-name {
@@ -244,3 +281,45 @@
 .pull-me p {
     text-align:center;
 }  
+
+#cssmenu ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  width: auto;
+  position: relative;
+  display: block;
+  height: 30px;
+  font-size: 12px;
+  font-weight: bold;
+  background: transparent url(nav_bg.png) repeat-x top left;
+  font-family: Arial, Helvetica, sans-serif;
+  border-bottom: 1px solid #000000;
+  border-top: 1px solid #000000;
+}
+#cssmenu li {
+  display: block;
+  float: left;
+  margin: 0;
+  padding: 0;
+}
+#cssmenu li a {
+  display: block;
+  float: left;
+  color: #999999;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 8px 20px 0 20px;
+}
+#cssmenu li a:hover {
+  color: #FFFFFF;
+  height: 22px;
+  background: transparent url(nav_bg.png) 0px -30px no-repeat;
+}
+#cssmenu li.active a {
+  display: inline;
+  height: 22px;
+  background: transparent url(nav_bg.png) 0px -30px no-repeat;
+  float: left;
+  margin: 0;
+}

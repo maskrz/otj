@@ -5,13 +5,27 @@
 		<%= csrf_meta_tags %>
 		<%= stylesheet_link_tag    "application", media: "all" %>
 		<%= javascript_include_tag "application" %>
+		<title>OTJ</title>
 	</head>
 	<body>
 		<section id="page">
 			<header id="header" class="header">
 				<div class="wrapper">
 					<div class = "logo">
-					<a href="<%= root_path %>"> <%= image_tag 'otd.png',:title => 'LOGO' %> </a>
+						<a href="<%= root_path %>"> <%= image_tag 'otd.png',:title => 'LOGO' %> </a>
+					</div>
+					<div id='cssmenu'>
+						<ul>
+							<li class='active'>
+								<a href='<%= root_path %>'><span>Home</span></a>
+							</li>
+							<li>
+								<a href='#'><span>O stronie</span></a>
+							</li>
+							<li>
+								<a href='#'><span>Historia treningów</span></a>
+							</li>
+						</ul>
 					</div>
 				</div>
 			</header>

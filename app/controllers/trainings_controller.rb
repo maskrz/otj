@@ -41,8 +41,7 @@ class TrainingsController < ApplicationController
   end
   
   def trainings_history
-    params["t1_id"] = 4
-    #render json: params
+    #render json: params[:id]
     @athlete = Athlete.find(params[:id])
     @trainings = @athlete.trainings
     @sec = @athlete.sections.order("length desc").map{|x| x.length}.uniq
