@@ -7,7 +7,8 @@ class TrainingsController < ApplicationController
   def add_training
     @training = Training.new(training_params)
     @training.save
-    redirect_to root_path
+    redirect_to trainings_path(@training)
+    #render json: @training.comment
   end
   
   def show

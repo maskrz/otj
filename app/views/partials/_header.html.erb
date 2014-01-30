@@ -20,11 +20,16 @@
 								<a href='<%= root_path %>'><span>Home</span></a>
 							</li>
 							<li>
-								<a href='#'><span>O stronie</span></a>
-							</li>
+								<span><%= link_to "O stronie", :controller => "home", :action => "about"%></span></a>
+							</li>							
 							<li>
-								<a href='#'><span>Historia treningów</span></a>
+								<span><%= link_to "Dzienniczek treningowy", :controller => "athletes", :action => "athletes_list" %></span></a>
 							</li>
+							<% if user_signed_in? %>
+							<li>
+								<a href='<%= auth_sign_out_path %>'><span>Wyloguj</span></a>
+							</li>
+							<% end %>
 						</ul>
 					</div>
 				</div>

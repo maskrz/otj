@@ -4,6 +4,7 @@ OTD::Application.routes.draw do
   ActiveAdmin.routes(self)
   root 'home#home'
   get "home/home"
+  get "home/about"
   
   scope :auth, :controller => :auth, :as => :auth do
     match 'sign_in', action: :login, via: [:get, :post]

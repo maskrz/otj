@@ -1,4 +1,3 @@
-<%= render "partials/header" %>
 
 <div class = "wrapper content-training">
 	<div class = "main-content">
@@ -18,7 +17,7 @@
 						<% @athletes.each do |a| %>
 						<div class = "col-xs-offset-2 col-xs-10">	
 							<div clas>
-								<%= link_to a.full_name, :controller => "trainings", :action => "trainings_history", :a_id => a.id %>	
+								<%= link_to a.full_name, :controller => "trainings", :action => "trainings_history", :id => a.id %>	
 							</div>
 							
 						</div>
@@ -35,6 +34,3 @@
 		<% end %>
 	</div>
 </div>
-<%= link_to 'Wyloguj', auth_sign_out_path %>
-
-<%= render "partials/footer" %>

@@ -1,31 +1,35 @@
-<%= render "partials/header" %>
+<div class = "wrapper content-training">
 
-<div class = "wrapper">
+	<div class = "main-content">
 
+		<h3>Dodaj nowy trening: </h3></br>
+		<%= form_for :training, url: trainings_add_training_path, method: :post do |f| %>
+		<div class="form-group row">
+			<%= f.label 'Data', class: "col-xs-4 control-label right" %>
+			<div class="col-xs-8">
+				<%= f.date_select :date %>
+			</div>
+		</div>
+		<div class="form-group row">
+			<%= f.label 'Komentarz', class: "col-xs-4 control-label right" %>
+			<div class="col-xs-8">
+				<%= f.text_area :date %>
+			</div>
+		</div>
+		<div class="form-group row">
+			<%= f.label 'Trener', class: "col-xs-4 control-label right" %>
+			<div class="col-xs-8">
+				<%= f.collection_select(:trainer_id, @trainers, "id", "surname", {:selected => current_user.id}) %>
+			</div>
+		</div>
 
-Dodaj nowy trening: </br>
-<%= form_for :training, url: trainings_add_training_path, method: :post do |t| %>
-  <div class="field">
-    <%= t.label :date %><br>
-    <%= t.date_select :date %>
-  </div>
-  <div class="field">
-    <%= t.label :comment %><br>
-    <%= t.text_area :comment %>
-  </div>
-  <div class="field">
-    <%= t.label :trainer %><br>
-    <%= t.collection_select(:trainer_id, @trainers, "id", "surname", {:selected => current_user.id}) %>
-  </div>
-  <div class="actions">
-    <%= t.submit %>
-  </div>
-<% end %>
+		<div class = "row cent">
+			<%= f.submit "Dodaj trening", class: "btn btn-success"%>
+		</div>
+		<% end %>
 
-
-</br>
-<%= link_to 'Wyloguj', auth_sign_out_path %>
+		</br>
+	</div>
 </div>
 
-
-<%= render "partials/footer" %>
+<%= link_to 'Wyloguj', auth_sign_out_path %>
