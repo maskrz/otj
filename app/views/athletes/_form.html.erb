@@ -1,0 +1,45 @@
+<%= form_for(@athlete) do |f| %>
+  <% if @athlete.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@athlete.errors.count, "error") %> prohibited this athlete from being saved:</h2>
+
+      <ul>
+      <% @athlete.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :surname %><br>
+    <%= f.text_field :surname %>
+  </div>
+  <div class="field">
+    <%= f.label :birth %><br>
+    <%= f.date_select(:birth, start_year: 1900) %>
+  </div>
+  <div class="field">
+    <%= f.label :email %><br>
+    <%= f.text_field :email %>
+  </div>
+  <div class="field">
+    <%= f.label :password %><br>
+    <%= f.text_field :password %>
+  </div>
+  <div class="field">
+    <%= f.label :state %><br>
+    <%= f.number_field :state %>
+  </div>
+  <div class="field">
+    <%= f.label :privacy %><br>
+    <%= f.number_field :privacy %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

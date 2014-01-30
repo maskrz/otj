@@ -1,0 +1,31 @@
+<%= render "partials/header" %>
+
+<div class = "wrapper">
+
+
+Dodaj nowy trening: </br>
+<%= form_for :training, url: trainings_add_training_path, method: :post do |t| %>
+  <div class="field">
+    <%= t.label :date %><br>
+    <%= t.date_select :date %>
+  </div>
+  <div class="field">
+    <%= t.label :comment %><br>
+    <%= t.text_area :comment %>
+  </div>
+  <div class="field">
+    <%= t.label :trainer %><br>
+    <%= t.collection_select(:trainer_id, @trainers, "id", "surname", {:selected => current_user.id}) %>
+  </div>
+  <div class="actions">
+    <%= t.submit %>
+  </div>
+<% end %>
+
+
+</br>
+<%= link_to 'Wyloguj', auth_sign_out_path %>
+</div>
+
+
+<%= render "partials/footer" %>

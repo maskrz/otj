@@ -1,0 +1,50 @@
+<%= render "partials/header" %>
+
+<div class = "wrapper content-training">
+	<div class = "main-content">
+		
+		<% @trainings.each do |t| %>
+		
+		
+		<div class = "row">
+			<div class = "col-xs-offset-1 col-xs-5">
+				<div class = "row">
+					Dane o treningu:
+				</div>	
+				<div class = "row">
+					<%= t.date %>
+				</div>	
+				<div class = "row">
+					Liczba uczestników: <%= t.participants_quantity %>
+				</div>	
+			</div>
+			<div class = "col-xs-4">
+				<div class = "row">
+					Komentarz:
+				</div>	
+				<div class = "row">
+					<%= simple_format t.comment %>
+				</div>	
+			</div>
+			<div class = "col-xs-2">
+				<div class = "row">
+					<% if user_type == 'T' %>
+						<%= button_to "", trainings_path(t),  class: "btn btn-primary right-arrow" %>
+					<% elsif user_type == 'A' %>
+						<% if !t.added(current_user )%>
+							<%= link_to "Dołącz", :controller => "trainings", :action => "add_athlete", :id => t.id, :a_id => current_user.id %>
+						<% else %>
+							<%= button_to "", {:controller => "trainings", :action => "fill_training", :id => t.id}, {method: :get, class: "btn btn-primary right-arrow"} %>
+						<% end %>
+					<% end %>
+				</div>	
+			</div>
+		</div>
+		<hr />
+		<% end %>
+	</div>
+</div>
+
+<%= link_to 'Wyloguj', auth_sign_out_path %>
+
+<%= render "partials/footer" %>

@@ -1,0 +1,156 @@
+<%= render "partials/header" %>
+
+<div class = "wrapper content-training">
+	<div class = "main-content">
+
+		<% if can? :read, @athlete %>
+		<div class = "row">
+			<div class = "col-xs-offset-1 athlete-name">
+				<%= @athlete.full_name %>
+			</div>
+		</div>
+		<hr>
+		<%= form_for :training, :url => url_for(:controller => "trainings", :action => "trainings_history"), method: :get do |f| %>
+		<div class = "row">
+			<div class = "col-xs-offset-1 sections-font">
+				Porównanie treningów:
+			</div>
+		</div>
+		<div class = "row">
+			<div class = "col-xs-offset-1 col-xs-5">
+				Trening 1: </br>
+				<% if params["training"] && !params["training"]["t1"].blank? %>
+				<%= f.collection_select("t1", @trainings, :id, :date, include_blank: true, :selected => params["training"]["t1"]) %>
+
+				<% @t1 = Training.find(params["training"]["t1"]) %>
+				<% @sections = @t1.athlete_training_sections(params["a_id"]) %>
+				</br>
+
+				<table class = "table table-striped table-bordered table-hover cent blue-back">
+					<% if @sections.size > 0 %>
+					<tr class = "danger">
+						<td># </td>
+						<td>Odcinek </td>
+						<td>Czas: </td>
+						<td>Przerwa: </td>
+					</tr>
+					<% end %>
+					<% $i = 1 %>
+					<% @sections.each do |s| %>
+					<tr>
+						<td><%= $i %>. </td>
+						<td><%= s.length %> </td>
+						<td><%= s.time %> </td>
+						<td><%= s.break %> </td>
+					</tr>
+
+					<% $i+=1 %>
+					<% end %>
+				</table>
+				<% else %>
+				<%= f.collection_select("t1", @trainings, :id, :date, include_blank: true) %>
+				<% end %>
+			</div>
+			<div class = "col-xs-5">
+				Trening 2: </br>
+				<% if params["training"] && !params["training"]["t2"].blank? %>
+				<%= f.collection_select("t2", @trainings, :id, :date, include_blank: true, :selected => params["training"]["t2"]) %>
+
+				<% @t2 = Training.find(params["training"]["t2"]) %>
+				<% @sections = @t2.athlete_training_sections(params["a_id"]) %>
+				</br>
+				<table class = "table table-striped table-bordered table-hover cent blue-back">
+					<% if @sections.size > 0 %>
+					<tr class = "danger">
+						<td># </td>
+						<td>Odcinek </td>
+						<td>Czas: </td>
+						<td>Przerwa: </td>
+					</tr>
+					<% end %>
+					<% $i = 1 %>
+					<% @sections.each do |s| %>
+					<tr>
+						<td><%= $i %>. </td>
+						<td><%= s.length %> </td>
+						<td><%= s.time %> </td>
+						<td><%= s.break %> </td>
+					</tr>
+
+					<% $i+=1 %>
+					<% end %>
+				</table>
+
+				<% else %>
+				<%= f.collection_select("t2", @trainings, :id, :date, include_blank: true) %>
+				<% end %>
+			</div>
+			<div class = "col-xs-1">
+				<%= hidden_field_tag :a_id, params["a_id"] %>
+				<%= f.submit "", class: "btn square refresh" %>
+			</div>
+		</div>
+		<hr>
+
+		<div class = "row">
+			<div class = "col-xs-offset-1 sections-font">
+				Historia odcinków:
+			</div>
+
+		</div>
+
+		<div class = "row">
+			<% @s_val = [] %>
+			<div class = "col-xs-1"></div>
+			<% if @sec.size > 0
+			$i = 0
+			@sec.each do |s|
+			$i+=1 %>
+			<div class = "col-xs-1">
+				<% if params["training"] && params["training"][s.to_s] == 1.to_s  %>
+				<%= f.check_box s, {checked: true } %><%= f.label s,  class: "small-margin-left" %>
+				<% @s_val.append s %>
+				<% else %>
+				<%= f.check_box s %><%= f.label s,  class: "small-margin-left" %>
+				<% end %>
+			</div>
+
+			<% end %>
+			<div class = "col-xs-1 col-xs-offset-<%= 10 - $i %>" >
+
+				<%= f.submit "", class: "btn square refresh" %>
+			</div>
+			<% else %>
+			Brak odcinków
+			<% end %>
+
+		</div>
+		<% @tr = @athlete.get_trainings %>
+		<% @s_val.each do |s| %>
+
+		<table class = "table table-striped table-bordered table-hover cent blue-back margin-right-left table-history">
+			<tr class = "sections-font table-history danger">
+				<td><%= s %></td>
+			</tr>
+			<% @tr.each do |tr| %>
+			<% @sec_val = tr.athlete_training_sections_values(@athlete, s) %>
+			<% if @sec_val.size > 0 %>
+			<tr>
+				<td><%= tr.date %> </td>
+				<% @sec_val.each do |sec| %>
+				<td><%= sec.time %> </td>
+				<% end %>
+			</tr>
+			<% end %>
+			<% end %>
+		</table>
+		<% end %>
+		<% end %>
+		<% else %>
+		Nie posiadasz wystarczających uprawnień, by przeglądać historię treningów tego zawodnika.
+		<% end %>
+	</div>
+</div>
+<%= link_to 'Wyloguj', auth_sign_out_path %>
+
+<%= render "partials/footer" %>

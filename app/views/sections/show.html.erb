@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Length:</strong>
+  <%= @section.length %>
+</p>
+
+<p>
+  <strong>Time:</strong>
+  <%= @section.time %>
+</p>
+
+<p>
+  <strong>Break:</strong>
+  <%= @section.break %>
+</p>
+
+<%= link_to 'Edit', edit_section_path(@section) %> |
+<%= link_to 'Back', sections_path %>

@@ -1,0 +1,17 @@
+<%= form_for(@gathlete) do |f| %>
+  <% if @gathlete.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@gathlete.errors.count, "error") %> prohibited this gathlete from being saved:</h2>
+
+      <ul>
+      <% @gathlete.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

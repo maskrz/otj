@@ -1,0 +1,27 @@
+<h1>Listing atrainings</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Comment</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @atrainings.each do |atraining| %>
+      <tr>
+        <td><%= atraining.comment %></td>
+        <td><%= link_to 'Show', atraining %></td>
+        <td><%= link_to 'Edit', edit_atraining_path(atraining) %></td>
+        <td><%= link_to 'Destroy', atraining, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Atraining', new_atraining_path %>

@@ -1,0 +1,85 @@
+<%= render "partials/header" %>
+
+<div class = "wrapper content-training">
+	<% @a = current_user %>
+	<div class = "row margin-right-left trainer-page-content">
+		<div class = "cent col-md-6">
+			Ostatnie treningi: </br>
+			<% @my_trainings.each do |t| %>
+			<%= link_to t.date, :controller => "trainings", :action => "fill_training", :id => t.id, :a_id => @a.id %>
+			<% if !t.participate(@a) %>
+			Brak wpisów!
+			<% end %>
+			<br />
+			<% end %>
+			</br>
+		</div>
+		<div class = "cent col-md-6">
+			Treningi trenera:</br>
+			<% @other_trainings.each do |t| %>
+			<%= t.date %> <%= link_to "Dołącz", :controller => "trainings", :action => "add_athlete", :id => t.id, :a_id => @a.id %></br>
+			<% end %>
+			</br>
+			<%= link_to "Wszystkie", :controller => :trainings, :action => "trainer_trainings", :id => @a.trainer %>
+			<%= link_to 'Historia treningow', :controller => "trainings", :action => "trainings_history", :id => @a.id %>
+		</div>
+	</div>
+	<div class = "row margin-right-left trainer-page-datas">
+
+		<%= form_for @athlete, :url => url_for(:controller => "profiles", :action => "update_athlete"), method: :post do |f|%>
+		<div id="data-edition" class="data-edition">
+			<h3>Edytuj swoje dane</h3>
+			<div class="form-group row">
+				<%= f.label 'Imie', class: "col-xs-4 control-label to-right" %>
+				<div class="col-xs-6">
+					<%= f.text_field :name, class: "form-control" %>
+				</div>
+			</div>
+			<div class="form-group row">
+				<%= f.label 'Nazwisko', class: "col-xs-4 control-label to-right" %>
+				<div class="col-xs-6">
+					<%= f.text_field :surname, class: "form-control" %>
+				</div>
+			</div>
+			<div class="form-group row">
+				<%= f.label 'Email', class: "col-xs-4 control-label to-right" %>
+				<div class="col-xs-6">
+					<%= f.text_field :email, class: "form-control" %>
+				</div>
+			</div>
+			<div class="form-group row">
+				<%= f.label 'Haslo', class: "col-xs-4 control-label to-right" %>
+				<div class="col-xs-6">
+					<%= f.password_field :password, class: "form-control" %>
+				</div>
+			</div>
+			<div class="form-group row">
+				<%= f.label 'Potwierdz haslo', class: "col-xs-4 control-label to-right" %>
+				<div class="col-xs-6">
+					<%= f.password_field :password_confirmation, class: "form-control" %>
+				</div>
+			</div>
+			<div class="form-group row">
+				<%= f.label 'Pokaz historie moich treningow', class: "col-xs-4 control-label right" %>
+				<div class="col-xs-8">
+					<%= f.select :privacy, @types, :selected => @types[@athlete.privacy-1], class: "form-control " %>
+				</div>
+			</div>
+			<div class="form-group row">
+				<%= f.label 'Data urodzenia', class: "col-xs-4 control-label right" %>
+				<div class="col-xs-6">
+					<%= f.date_select :birth, start_year: 1900, :birth, class: "form-control" %>
+				</div>
+			</div>
+			<div class = "row cent">
+			<%= f.submit "Zapisz zmiany", class: "btn btn-success"%>
+			</div>
+
+		</div>
+		<% end %>
+	</div>
+
+</div>
+<%= link_to 'Wyloguj', auth_sign_out_path %>
+</div>
+<%= render "partials/footer" %>

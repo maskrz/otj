@@ -1,0 +1,61 @@
+<%= render "partials/header" %>
+
+<div class = "wrapper">
+	Wybierz zawodnika z już zarejestrowanych:
+	<%= form_for :athlete, :url => url_for(:controller => :athletes, :action => 'assign_athlete'), method: :post do |f| %>
+	<div class="field">
+		<%= f.label :athlete %>
+		<br>
+		<%= f.collection_select(:athlete_id, @athletes, "id", :full_name) %>
+	</div>
+	<div class="actions">
+		<% if can? :create, @athlete %>
+		<%= f.hidden_field :trainer_id, :value => current_user.id %>
+		<%= f.submit "Dodaj zawodnika", class: "btn btn-primary" %>
+		<% end %>
+	</div>
+	<% end %>
+	<div id = "new-athlete-box" class = "data-edition">
+		<%= form_for :athlete, :url => url_for(:controller => :athletes, :action => 'new_athlete'), method: :post do |f| %>
+		<div class="form-group row">
+			<%= f.label 'Imie', class: "col-xs-4 control-label form-label" %>
+			<div class="col-xs-6">
+				<%= f.text_field :name, class: "form-control" %>
+			</div>
+		</div>
+		<div class="form-group row">
+			<%= f.label 'Nazwisko', class: "col-xs-4 control-label form-label" %>
+			<div class="col-xs-6">
+				<%= f.text_field :surname, class: "form-control" %>
+			</div>
+		</div>
+		<div class="form-group row">
+			<%= f.label 'Data urodzenia', class: "col-xs-4 control-label form-label" %>
+			<div class="col-xs-6">
+				<%= f.date_select :birth, start_year: 1900, class: "form-control" %>
+			</div>
+		</div>
+		<div class="form-group row">
+			<%= f.label 'Email', class: "col-xs-4 control-label form-label form-label" %>
+			<div class="col-xs-6">
+				<%= f.text_field :email, class: "form-control" %>
+			</div>
+		</div>
+		<%= f.hidden_field :trainer_id, :value => current_user.id %>
+		<div class="row cent">
+			<%= f.submit "Dodaj zawodnika", class: "btn btn-primary" %>
+		</div>
+		</br>
+		<% end %>
+	</div>
+	<p class="slide">
+		<div class="pull-me btn-info">
+			Lub kliknij, by dodać nowego!
+		</div>
+	</p>
+
+	</br>
+	<%= link_to 'Wyloguj', auth_sign_out_path %>
+</div>
+
+<%= render "partials/footer" %>

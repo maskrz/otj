@@ -1,0 +1,47 @@
+<%= render "partials/header" %>
+
+<div class = "wrapper">
+
+	Dane o treningu: </br>
+	<%= @training.date %> </br>
+	<%= @training.comment %></br>
+
+	<% @sections.each do |s| %>
+	<%= s.length.to_s + " "+s.time + " "+s.break %> </br>
+	<% end %>
+
+	<br/>
+	<div class = "row">
+		<%= form_for :section, :url => url_for(:controller => 'sections', :action => 'add'), method: :post do |s| %>
+		<div class="field col-md-3">
+			<%= s.label :length %>
+			<br>
+			<%= s.number_field :length %>
+		</div>
+		<div class="field col-md-3">
+			<%= s.label :time %>
+			<br>
+			<%= s.text_field :time %>
+		</div>
+		<div class="field col-md-3">
+			<%= s.label :break %>
+			<br>
+			<%= s.text_field :break %>
+		</div>
+		<div class="actions col-md-3">
+			
+			<%= s.hidden_field :sequence, :value => @athlete.last_section_sequence(@athlete.get_at(@training.id, @athlete.id)) %>
+			<%= s.hidden_field :atraining_id, :value => @athlete.get_at(@training.id, @athlete.id).id %>
+			<%= s.hidden_field :training_id, :value => @training.id %>
+			
+			<br><%= s.submit %>
+		</div>
+	</div>
+	</br></br>
+	<% end %>
+	
+	</br>
+	<%= link_to 'Wyloguj', auth_sign_out_path %>
+</div>
+
+<%= render "partials/footer" %>

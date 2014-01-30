@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  length: 1
+  time: MyString
+  break: MyString
+
+two:
+  length: 1
+  time: MyString
+  break: MyString

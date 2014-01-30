@@ -1,0 +1,57 @@
+<%= render "partials/header" %>
+
+<div class = "wrapper">
+	Wybierz zawodnika z już zarejestrowanych:
+	<%= form_for :gathlete, :url => url_for(:controller => :gathletes, :action => 'add_athlete'), method: :post do |f| %>
+  <div class="field">
+    <%= f.label :athlete %><br>
+    <%= f.collection_select(:athlete_id, @athletes, "id", :full_name) %>
+  </div>
+  <div class="actions">
+  	<%= f.hidden_field :group_id, :value => params["g_id"] %>
+  	<%= f.submit "Dodaj zawodnika", class: "btn btn-primary" %>
+  </div>
+<% end %>
+<div id = "new-athlete-box">
+<%= form_for :athlete, :url => url_for(:controller => :athletes, :action => 'new_athlete'), method: :post do |f| %>
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :surname %><br>
+    <%= f.text_field :surname %>
+  </div>
+  <div class="field">
+    <%= f.label :birth %><br>
+    <%= f.date_select(:birth, start_year: 1900) %>
+  </div>
+  <div class="field">
+    <%= f.label :email %><br>
+    <%= f.text_field :email %>
+  </div>
+  <div class="field">
+    <%= f.label :password %><br>
+    <%= f.text_field :password %>
+  </div>
+  <div class="field">
+    <%= f.label :state %><br>
+    <%= f.number_field :state %>
+  </div>
+  <div class="field">
+    <%= f.label :privacy %><br>
+    <%= f.number_field :privacy %>
+  </div>
+  <%= f.hidden_field :group_id, :value => params["g_id"] %>
+  <div class="actions">
+    <%= f.submit "Dodaj zawodnika", class: "btn btn-primary" %>
+  </div>
+<% end %>
+</div>
+<p class="slide"><div class="pull-me btn-info">Lub kliknij, by dodać nowego!</div></p>
+
+	</br>
+	<%= link_to 'Wyloguj', auth_sign_out_path %>
+</div>
+
+<%= render "partials/footer" %>
