@@ -25,7 +25,7 @@ test:
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 production:
-  adapter: postgresql
+  adapter: mysql2
   dbname: ddjdu65v1ni7em
   user: xllikbkwjavbcm
   port: 5432
