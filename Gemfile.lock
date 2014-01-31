@@ -181,7 +181,6 @@ PLATFORMS
 
 DEPENDENCIES
   activeadmin!
-  bundler (~> 1.5.2)
   cancan
   coffee-rails (>= 4.0.0)
   jbuilder (>= 1.2)
