@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/gregbell/active_admin.git
-  revision: bae6cec4c38ac43deff4476b128796ecfad5741b
+  revision: e00143ead12f94b61c0a7d3ad9ce2cff2fc34fde
   specs:
     activeadmin (1.0.0.pre)
       arbre (~> 1.0)
@@ -176,6 +176,7 @@ PLATFORMS
 
 DEPENDENCIES
   activeadmin!
+  bundler (>= 1.5.2)
   cancan
   coffee-rails (>= 4.0.0)
   jbuilder (>= 1.2)

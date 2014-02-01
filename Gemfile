@@ -31,6 +31,7 @@ gem "rails-assets", ">= 0.5.2"
 gem 'rails-assets-bootstrap'
 gem 'cancan'
 gem 'activeadmin', :github => 'gregbell/active_admin'
+gem 'bundler', ">= 1.5.2"
 
 
 group :production do
