@@ -1,0 +1,17 @@
+---
+applications:
+  .:
+    name: otj
+    framework:
+      name: rails3
+      info:
+        mem: 256M
+        description: Rails Application
+        exec: 
+    infra: eu-aws
+    url: ${name}.${target-base}
+    mem: 512M
+    instances: 1
+    services:
+      mysql-e9548:
+        type: mysql

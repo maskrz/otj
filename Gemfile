@@ -31,12 +31,8 @@ gem "rails-assets", ">= 0.5.2"
 gem 'rails-assets-bootstrap'
 gem 'cancan'
 gem 'activeadmin', :github => 'gregbell/active_admin'
-gem 'bundler', ">= 1.5.2"
 
-
-group :production do
-  gem 'mysql'
-end
+gem 'rails_12factor', group: :production
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
@@ -49,3 +45,5 @@ end
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+
+ruby "1.9.3"
