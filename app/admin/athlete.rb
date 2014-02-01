@@ -1,6 +1,6 @@
 ActiveAdmin.register Athlete do
 
-  permit_params :id, :name, :surname, :birth, :email, :state, :privacy, :password, :trainer
+  permit_params :id, :name, :surname, :birth, :email, :state, :privacy, :password, :trainer_id
 
   controller do
     def update
