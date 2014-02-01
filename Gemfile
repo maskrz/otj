@@ -35,7 +35,6 @@ gem 'activeadmin', :github => 'gregbell/active_admin'
 
 group :production do
   gem 'mysql'
-  gem 'rails_12factor', '0.0.2'
 end
 
 # Use ActiveModel has_secure_password
