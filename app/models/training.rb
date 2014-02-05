@@ -16,6 +16,11 @@ class Training < ActiveRecord::Base
     end
   end
   
+  def training_exists(date, trainer)
+    @trainings = Training.where(date: date, trainer_id: trainer.id)
+    !@trainings.empty?
+  end
+  
   def display_name
     date.to_s  + " "+ trainer.display_name if trainer
   end

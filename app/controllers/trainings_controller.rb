@@ -6,9 +6,16 @@ class TrainingsController < ApplicationController
   
   def add_training
     @training = Training.new(training_params)
-    @training.save
-    redirect_to trainings_path(@training)
-    #render json: @training.comment
+    
+    @date = params[:training]["date(1i)"] + "-"+params[:training]["date(2i)"]+"-"+params[:training]["date(3i)"]
+    @trainer = current_user if user_type == "T"
+    @trainer = current_user.trainer if user_type == "A"
+    if @training.training_exists(@date, @trainer)
+      redirect_to :back, :flash => { :error => "Trening w tym dniu zostal juz utworzony. Wypelnij go, lub wybierz inna date."}
+    else
+      @training.save
+      redirect_to trainings_path(@training)
+    end
   end
   
   def show

@@ -27,6 +27,11 @@
 								<span><%= link_to "Dzienniczek treningowy", :controller => "athletes", :action => "athletes_list" %></span></a>
 							</li>
 							<% if user_signed_in? %>
+							<% if can? :add_training, @training %>												
+							<li>
+								<span><%= link_to "Dodaj trening", :controller => "trainings", :action => "new_training" %></span></a>
+							</li>
+							<% end %>
 							<li>
 								<a href='<%= auth_sign_out_path %>'><span>Wyloguj</span></a>
 							</li>
