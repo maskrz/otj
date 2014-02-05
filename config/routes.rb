@@ -16,6 +16,7 @@ OTD::Application.routes.draw do
     get 'trainer_page'
     match 'update_trainer', action: :update_trainer, via: [:get, :post]
     match 'update_athlete', action: :update_athlete, via: [:get, :post]
+    match 'update_athlete_state', action: :update_athlete_state, via: [:get, :post]
   end
   
   scope :trainings, :controller => :trainings, :as => :trainings do

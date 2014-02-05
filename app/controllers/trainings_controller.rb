@@ -46,7 +46,7 @@ class TrainingsController < ApplicationController
     @athlete = Athlete.find(params[:id])
     @trainings = @athlete.trainings.order("date desc")
     @sec = @athlete.sections.order("length desc").map{|x| x.length}.uniq
-    
+    @states = Athlete::STATE_TYPES
   end
   
   def trainer_trainings

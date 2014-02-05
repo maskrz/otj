@@ -12,6 +12,8 @@ class ProfilesController < ApplicationController
       end
     end
     @other_trainings = @trainer_trainings - @my_trainings
+    @other_trainings = @other_trainings.take(5)
+    @my_trainings = @my_trainings.take(5)
     @types = Athlete::PRIVACY_TYPES
   end
   
@@ -45,7 +47,7 @@ class ProfilesController < ApplicationController
   
   def update_athlete
     #render json: params
-    @athlete = current_user
+    @athlete = Athlete.find(params[:athlete][:id])
     @athlete.name = params[:athlete][:name]
     @athlete.surname = params[:athlete][:surname]
     @athlete.email = params[:athlete][:email]
@@ -63,7 +65,9 @@ class ProfilesController < ApplicationController
     end
     
     pass_changed = false
-    @athlete.birth = params[:athlete]["birth(1i)"] + "-"+params[:athlete]["birth(2i)"]+"-"+params[:athlete]["birth(3i)"]
+    if params[:athlete]["birth(1i)"]
+      @athlete.birth = params[:athlete]["birth(1i)"] + "-"+params[:athlete]["birth(2i)"]+"-"+params[:athlete]["birth(3i)"]
+    end
     
     if(params[:athlete][:password] == params[:athlete][:password_confirmation] && !params[:athlete][:password].blank?)
       @athlete.password = Digest::MD5.hexdigest(params[:athlete][:password])
@@ -78,5 +82,18 @@ class ProfilesController < ApplicationController
     end
   end
   
+  def update_athlete_state    
+    @athlete = Athlete.find(params[:athlete][:id])
+    case params[:athlete][:state]
+    when "Nie moze zakladac treningow"
+      @athlete.state = 1
+    when "Moze zakladac treningi"
+      @athlete.state = 2
+    else
+      @athlete.state = 1
+    end
+    @athlete.save
+    redirect_to :back
+  end
   
 end

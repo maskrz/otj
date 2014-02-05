@@ -7,6 +7,7 @@ class Athlete < ActiveRecord::Base
   has_many :sections, :through => :atrainings
   
   PRIVACY_TYPES = ["Wszyscy", "Zarejestrowani", "Zawodnicy z grupy", "Tylko ja"]
+  STATE_TYPES = ["Nie moze zakladac treningow", "Moze zakladac treningi"]
   
   def sections_list (atid)
     Section.where(atraining_id: atid).order('sequence ASC')
