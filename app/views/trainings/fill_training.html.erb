@@ -85,9 +85,24 @@
 
 				<%= s.submit "Dodaj odcinek", class: "btn btn-success" %>
 			</div>
+
 			<% end %>
 		</div>
+		</br>
+		</br>
+		<%= form_for :atraining, :url => url_for(:controller => 'atrainings', :action => 'add_comment'), method: :post do |f| %>
+		<div class="form-group row">
+			<%= f.label 'Komentarz', class: "col-xs-2 control-label right" %>
+			<div class="col-xs-4">
+				<%= f.text_area :comment, :size => "40x5" %>
+			</div>
+			<div class="col-xs-4">
+				<%= f.hidden_field :id, :value => @atraining.id %>
 
+				<%= f.submit "Zapisz komentarz", class: "btn btn-success" %>
+				<% end %>
+			</div>
+		</div>
 	</div>
 </div>
 

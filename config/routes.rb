@@ -51,11 +51,13 @@ OTD::Application.routes.draw do
     match 'athletes_list', action: :athletes_list, via: [:get, :post]
   end
   
+  scope :atrainings, :controller => :atrainings, :as => :atrainings do
+    match 'add_comment', action: :add_comment, via: [:get, :post]
+  end
+  
   scope :remote, :controller => :remote, :as => :remote do
     match 'get_trainings', action: :get_trainings, via: [:get, :post]
   end
-  
-  resources :atrainings
 
   resources :trainers
 

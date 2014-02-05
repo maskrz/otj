@@ -4,6 +4,7 @@ class AthletesController < ApplicationController
   
   def new_athlete
     @athlete = Athlete.new(athlete_params)
+    @athlete.email = params[:athlete][:name][0, 2].downcase + params[:athlete][:surname][0, 3].downcase + "@gmail.com" if params[:athlete][:email].blank?
     #render json: athlete_params
     @athlete.privacy = 4
     pass = params[:athlete][:name][0, 2].downcase + params[:athlete][:surname][0, 3].downcase

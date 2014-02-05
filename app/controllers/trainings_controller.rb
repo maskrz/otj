@@ -46,6 +46,7 @@ class TrainingsController < ApplicationController
     @training = Training.find(params[:id])
     @athlete = current_user
     @sections = @athlete.sections_list(@athlete.get_at(@training.id, @athlete.id))
+    @atraining = Atraining.where(training_id: @training.id, athlete_id: @athlete.id).first
   end
   
   def trainings_history
