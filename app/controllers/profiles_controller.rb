@@ -19,7 +19,7 @@ class ProfilesController < ApplicationController
   
   def trainer_page
     @trainer = current_user
-    @athletes = Athlete.where(trainer_id: current_user.id)
+    @athletes = Athlete.where(trainer_id: current_user.id).order("surname asc")
     @trainings = Training.where(trainer_id: current_user.id).order('date DESC').first(5)    
   end
   
