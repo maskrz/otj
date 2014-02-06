@@ -1,11 +1,12 @@
 ActiveAdmin.register Training do
 
-  permit_params :id, :date, :comment, :trainer_id
+  permit_params :id, :date, :comment, :trainer_id, :training_type
 
   index do
     column :id
     column :date
     column :comment
+    column :training_type
     column :trainer
     column :created_at
     
@@ -16,6 +17,7 @@ ActiveAdmin.register Training do
   filter :sections
   filter :trainer
   filter :date
+  filter :training_type
   filter :comment
   filter :created_at
   # See permitted parameters documentation:

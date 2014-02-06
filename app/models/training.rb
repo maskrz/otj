@@ -4,6 +4,8 @@ class Training < ActiveRecord::Base
   has_many :sections, :through => :atrainings
   belongs_to :trainer
   
+  TRAINING_TYPES = ["Tempo", "Szybkosc"]
+  
   def added(athlete)
     !Atraining.where(training_id: id, athlete_id: athlete.id).empty?
   end
@@ -35,6 +37,10 @@ class Training < ActiveRecord::Base
     @athlete = Athlete.find(athlete)
     @atraining = Atraining.where(training_id: id, athlete_id: @athlete.id).first
     @sections = @athlete.sections.where(atraining_id: @atraining.id, length: section).order('sequence ASC')
+  end
+  
+  def training_full_name
+    date.to_s + " "+training_type
   end
   
   def participants_quantity

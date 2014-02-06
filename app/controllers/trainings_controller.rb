@@ -2,6 +2,7 @@ class TrainingsController < ApplicationController
   before_action :set_training, only: [:show]
   def new_training
     @trainers = Trainer.all
+    @types = Training::TRAINING_TYPES
   end
   
   def add_training
@@ -68,6 +69,6 @@ class TrainingsController < ApplicationController
     end
     
     def training_params
-      params.require(:training).permit(:date, :comment, :trainer_id)
+      params.require(:training).permit(:date, :comment, :type, :trainer_id)
     end
 end

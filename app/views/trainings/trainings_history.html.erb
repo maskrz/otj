@@ -7,16 +7,18 @@
 				<%= @athlete.full_name %>
 			</div>
 			<%= form_for @athlete, :url => url_for(:controller => "profiles", :action => "update_athlete_state"), method: :post do |f|%>
+			<% if can? :manage_athlete, @athlete %>
 			<div class = "col-xs-3">
-				<% if can? :manage_athlete, @athlete %>
-					<%= f.select :state, @states, :selected => @states[@athlete.state-1], class: "form-control " %>
-				<% end %>
-			</div>
-			<div>
 				
-			</div class = "col-xs-1">
+					<%= f.select :state, @states, :selected => @states[@athlete.state-1], class: "form-control " %>
+				
+			</div>
+			<div class = "col-xs-1">
 			<%= f.hidden_field :id, :value => @athlete.id %>
 			<%= f.submit "Zapisz", class: "btn btn-success"%>
+				
+			</div >
+			<% end %>
 			<% end %>
 		</div>
 		<hr>
@@ -30,7 +32,7 @@
 			<div class = "col-xs-offset-1 col-xs-5">
 				Trening 1: </br>
 				<% if params["training"] && !params["training"]["t1"].blank? %>
-				<%= f.collection_select("t1", @trainings, :id, :date, include_blank: true, :selected => params["training"]["t1"]) %>
+				<%= f.collection_select("t1", @trainings, :id, :training_full_name, include_blank: true, :selected => params["training"]["t1"]) %>
 
 				<% @t1 = Training.find(params["training"]["t1"]) %>
 				<% @sections = @t1.athlete_training_sections(params[:id]) %>
@@ -58,13 +60,13 @@
 					<% end %>
 				</table>
 				<% else %>
-				<%= f.collection_select("t1", @trainings, :id, :date, include_blank: true) %>
+				<%= f.collection_select("t1", @trainings, :id, :training_full_name, include_blank: true) %>
 				<% end %>
 			</div>
 			<div class = "col-xs-5">
 				Trening 2: </br>
 				<% if params["training"] && !params["training"]["t2"].blank? %>
-				<%= f.collection_select("t2", @trainings, :id, :date, include_blank: true, :selected => params["training"]["t2"]) %>
+				<%= f.collection_select("t2", @trainings, :id, :training_full_name, include_blank: true, :selected => params["training"]["t2"]) %>
 
 				<% @t2 = Training.find(params["training"]["t2"]) %>
 				<% @sections = @t2.athlete_training_sections(params[:id]) %>
@@ -92,7 +94,7 @@
 				</table>
 
 				<% else %>
-				<%= f.collection_select("t2", @trainings, :id, :date, include_blank: true) %>
+				<%= f.collection_select("t2", @trainings, :id, :training_full_name, include_blank: true) %>
 				<% end %>
 			</div>
 			<div class = "col-xs-1">

@@ -11,6 +11,12 @@
 			</div>
 		</div>
 		<div class="form-group row">
+			<%= f.label 'Rodzaj', class: "col-xs-4 control-label right" %>
+			<div class="col-xs-8">
+				<%= f.select :training_type, @types, :selected => 0, class: "form-control " %>
+			</div>
+		</div>
+		<div class="form-group row">
 			<%= f.label 'Komentarz', class: "col-xs-4 control-label right" %>
 			<div class="col-xs-8">
 				<%= f.text_area :comment %>
