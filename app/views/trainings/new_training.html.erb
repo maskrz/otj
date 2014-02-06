@@ -13,7 +13,7 @@
 		<div class="form-group row">
 			<%= f.label 'Komentarz', class: "col-xs-4 control-label right" %>
 			<div class="col-xs-8">
-				<%= f.text_area :comment, :value => @atraining.comment.html_safe %>
+				<%= f.text_area :comment %>
 			</div>
 		</div>
 		<% if user_type == "A" %>
