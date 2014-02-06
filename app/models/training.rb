@@ -4,7 +4,7 @@ class Training < ActiveRecord::Base
   has_many :sections, :through => :atrainings
   belongs_to :trainer
   
-  TRAINING_TYPES = ["Tempo", "Szybkosc", "Zawody"]
+  TRAINING_TYPES = ["Tempo", "Szybkosc", "Zawody", "Sprawdzian"]
   
   def added(athlete)
     !Atraining.where(training_id: id, athlete_id: athlete.id).empty?
