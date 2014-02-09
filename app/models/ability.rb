@@ -17,6 +17,11 @@ class Ability
       end
       if current_user.state >= 2
         can :add_training
+      end      
+      if current_user.state >= 3
+        can :manage_training, Training do |training|
+          training.trainer == current_user.trainer
+        end
       end
     else
       can :read, Athlete do |athlete|

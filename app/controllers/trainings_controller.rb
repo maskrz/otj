@@ -51,11 +51,27 @@ class TrainingsController < ApplicationController
   end
   
   def trainings_history
-    #render json: params[:id]
+    #render json: params[:training][:Tempo]
     @athlete = Athlete.find(params[:id])
-    @trainings = @athlete.trainings.order("date desc")
+    @tr = @athlete.trainings.order("date desc")
+    @trainings = Array.new
+    #@t = @trainings.first()
+    #@types = []
+    if params[:training]
+      #render json: params[:training][@t.training_type]
+      @tr.each do |t|
+        #@types.append(params[:training][t.training_type])
+        if(params[:training][t.training_type].to_i == 1)
+          @trainings.append(t)
+        end
+      end
+    else
+      @trainings = @athlete.trainings.order("date desc")
+    end
+    #render json: @types
     @sec = @athlete.sections.order("length desc").map{|x| x.length}.uniq
     @states = Athlete::STATE_TYPES
+    @training_types = Training::TRAINING_TYPES
   end
   
   def trainer_trainings
@@ -69,6 +85,6 @@ class TrainingsController < ApplicationController
     end
     
     def training_params
-      params.require(:training).permit(:date, :comment, :type, :trainer_id)
+      params.require(:training).permit(:date, :comment, :training_type, :trainer_id)
     end
 end

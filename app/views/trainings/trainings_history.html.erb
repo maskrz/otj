@@ -9,25 +9,45 @@
 			<%= form_for @athlete, :url => url_for(:controller => "profiles", :action => "update_athlete_state"), method: :post do |f|%>
 			<% if can? :manage_athlete, @athlete %>
 			<div class = "col-xs-3">
-				
-					<%= f.select :state, @states, :selected => @states[@athlete.state-1], class: "form-control " %>
-				
+
+				<%= f.select :state, @states, :selected => @states[@athlete.state-1], class: "form-control " %>
+
 			</div>
 			<div class = "col-xs-1">
-			<%= f.hidden_field :id, :value => @athlete.id %>
-			<%= f.submit "Zapisz", class: "btn btn-success"%>
-				
+				<%= f.hidden_field :id, :value => @athlete.id %>
+				<%= f.submit "Zapisz", class: "btn btn-success"%>
+
 			</div >
 			<% end %>
 			<% end %>
 		</div>
 		<hr>
-		<%= form_for :training, :url => url_for(:controller => "trainings", :action => "trainings_history"), method: :get do |f| %>
+
 		<div class = "row">
 			<div class = "col-xs-offset-1 sections-font">
 				Porównanie treningów:
 			</div>
 		</div>
+
+		<%= form_for :training, :url => url_for(:controller => "trainings", :action => "trainings_history"), method: :get do |f| %>
+		<div class = "row">
+			<div class = "col-xs-offset-1 sections-font">
+				Pokaż treningi następujących typów:
+			</div>
+		</div>
+		<div class = "row">
+			<div class = "col-xs-1"></div>
+			<% @training_types.each do |tt| %>
+			<div class = "col-xs-2">
+				<% if params["training"] && params["training"][tt.to_s] == 0.to_s %>
+				<%= f.check_box tt %><%= f.label tt,  class: "small-margin-left" %>
+				<% else %>
+				<%= f.check_box tt, {:checked => true}%><%= f.label tt,  class: "small-margin-left" %>
+				<% end %>
+			</div>
+			<% end %>
+		</div>
+
 		<div class = "row">
 			<div class = "col-xs-offset-1 col-xs-5">
 				Trening 1: </br>
@@ -103,7 +123,6 @@
 			</div>
 		</div>
 		<hr>
-
 		<div class = "row">
 			<div class = "col-xs-offset-1 sections-font">
 				Historia odcinków:
