@@ -4,9 +4,12 @@ class Ability
   def initialize(current_user)
     
     if current_user.kind_of? Trainer
-      can :manage, :all
+      can :add_training, :all
       can :manage_training, Training do |training|
         training.trainer == current_user
+      end
+      can :read, Athlete do |athlete|
+        athlete.privacy <= 2 || athlete.trainer == current_user
       end
       can :manage_athlete, Athlete do |athlete|
         athlete.trainer == current_user
